@@ -1,0 +1,4 @@
+export const API_ERROR = 'API_ERROR';
+export const EMPTY_STRING = 'EMPTY_STRING';
+export const REMOVE_ERROR_DIALOG = 'REMOVE_ERROR_DIALOG';
+export const GET_ASSETS = 'GET_ASSETS'
