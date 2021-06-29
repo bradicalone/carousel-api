@@ -4,7 +4,7 @@
   "description": "Carousel API",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --watch",
+    "build": "webpack -p",
     "dev": "webpack-dev-server --mode development --open --hot",
     "front": "(npm run build & npm run dev)"
   },

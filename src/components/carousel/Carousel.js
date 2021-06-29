@@ -55,8 +55,6 @@ const Carousel = props => {
                                             <div className="carousel-image">
                                                 {asset.media.desktop && <img className="desktop" src={asset.media.desktop}></img>}
                                                 {asset.media.mobile && <img className="mobile" src={asset.media.mobile}></img>}
-                                                
-                                            
                                             </div>
                                             <div className={size[0] > 767 ? "carousel-content desktop" : "carousel-content mobile"}>
                                                 <h1>{asset.title}</h1>
