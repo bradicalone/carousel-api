@@ -58,15 +58,17 @@
   width: 1250px;
   display: flex;
   justify-content: space-around;
+  width: 200%;
 }
 
 .c-carousel .c-carousel-wrap .carousel-item-array .c-carousel-item {
   backface-visibility: hidden;
   margin: 5px;
   float: left;
-  background-color: rgba(1, 13, 16, 0.05);
   touch-action: none;
   position: relative;
+  overflow: hidden;
+  width: 25%;
 }
 
 .c-carousel .c-carousel-wrap .carousel-item-array .carousel-image {
@@ -163,4 +165,19 @@
   .c-carousel .c-carousel-wrap .carousel-item-array .btn-group {
     width: 100%;
   }
+}
+
+.carousel-list {
+  width: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+
+.carousel-list .dot {
+  width: 10px;
+  height: 10px;
+  display: block;
+  background: #000;
+  border-radius: 50%;
 }

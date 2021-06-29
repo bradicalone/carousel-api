@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import { getAssets } from '../../actions/carouselAssets';
 import Controls from './Controls'
+import ItemList from './ItemList'
 import { ShowItems } from '../../ShowItems';
 import './carousel.css'
 
@@ -13,30 +14,32 @@ const Carousel = props => {
     useEffect(() => {
         props.dispatch(getAssets('/'))
     }, []);
-    useEffect(() => {
 
-            if(props.assets.length == 3){
-                Promise.all(Array.from(document.querySelectorAll('.carousel-image img')).map(img => {
-                    if (img.complete)
-                        return Promise.resolve(img.naturalHeight !== 0);
-                    return new Promise(resolve => {
-                        img.addEventListener('load', () => resolve(true));
-                        img.addEventListener('error', () => resolve(false));
-                    });
-                })).then(results => {
-                    if (results.every(res => res)) {
-                        const showItems = new ShowItems() 
-                        setUtil(showItems)
-                        showItems.checkWidth()
-                        window.onresize = () => {
-                            console.log('hit')
-                            showItems.checkWidth()
-                        }
-                    }
-                    else
-                        console.log('some images failed to load, all finished loading');
-                });
-            } 
+    function load() {
+        Promise.all(Array.from(document.querySelectorAll('.carousel-image img')).map(img => {
+            if (img.complete)
+                return Promise.resolve(img.naturalHeight !== 0);
+            return new Promise(resolve => {
+                img.addEventListener('load', () => resolve(true));
+                img.addEventListener('error', () => resolve(false));
+            });
+        })).then(results => {
+            if (results.every(res => res)) {
+                const showItems = new ShowItems() 
+                setUtil(showItems)
+                showItems.checkWidth()
+                window.onresize = () => {
+                    showItems.checkWidth()
+                }
+            }
+            else
+                console.log('some images failed to load, all finished loading');
+        });
+    }
+    useEffect(() => {
+        if(props.assets.length){
+            load()
+        } 
     }, [props.assets])
 
     return (
@@ -73,12 +76,12 @@ const Carousel = props => {
                     <Controls rotate={util}/>
                 </div>
             </div>
+            <ItemList util={util}/>
         </div>
     )
 }
 
 const mapStateToProps = state => {
-   
     return {
         assets: state.data
     }

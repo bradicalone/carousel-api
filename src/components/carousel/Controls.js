@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
-import { getAssets } from '../../actions/carouselAssets';
-import { ShowItems } from '../../ShowItems';
 import './carousel.css'
 
 const Controls = props => {
